@@ -1,9 +1,9 @@
-<h1> All Plots with I.D.'s and names </h1>
+<h1> All Plots with I.D.'s and Plants Associated with those Plots </h1>
 <% @plots.each do |plot|%>
     <p> Plot Number:  <%= plot.number%> </p>
       <% plot.plants.each do |plant|%>
         <section id="plants-<%= plant.id %>">
-          <p> Plants associated with this plot: <%= plant.name%> <%= link_to "Remove Plant", "/plots/#{plant.id}"%> </p>
+          <p> Plants Associated with this Plot: <%= plant.name%> <%= link_to "Remove Plant", %> </p>
         </section>
       <% end %>
 <% end %>

@@ -42,4 +42,8 @@ RSpec.describe 'plot index page' do
     expect(page).to_not have_content(@plot2.direction)
     expect(page).to_not have_content(@plot3.direction)
   end
+
+  it 'can click a remove plant button and delete the association between that plant and the plot associated' do
+    save_and_open_page
+  end
 end
