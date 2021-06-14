@@ -1,11 +1,5 @@
 require 'rails_helper'
-
-RSpec.describe Garden do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plants).through(:plots) }
-  end
-
+RSpec.describe 'garden show page' do
   before :each do
     @garden1 = Garden.create!(name: "Gun", organic: false)
     @garden2 = Garden.create!(name: "Charlie", organic: true)
@@ -24,14 +18,18 @@ RSpec.describe Garden do
     @plotplant5 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
     @plotplant6 = PlotPlant.create!(plant_id: @plant4.id, plot_id: @plot2.id)
     @plotplant7 = PlotPlant.create!(plant_id: @plant5.id, plot_id: @plot2.id)
+
+    visit "/gardens/#{@garden1.id}"
   end
 
-  describe 'instance methods' do
-    describe '#that it filters out names by unique and also does not list plants with day to harvest over 100 days' do
-      it 'can filter names to only be used once and does not show plant with harvest over a 100 days' do
-        
-        expect(@garden1.unique_name_and_not_100_days).to eq([@plant3.name, @plant4.name])
-      end
-    end
+  it 'shows the Gardens name and all the plants that are in that garden by name and take less than a 100 days to harvest' do
+
+    save_and_open_page
+    expect(current_path).to eq("/gardens/#{@garden1.id}")
+    expect(page).to have_content(@garden1.name)
+    expect(page).to have_content(@garden1.organic)
+    expect(page).to have_content(@plant3.name)
+    expect(page).to have_content(@plant4.name)
+    expect(page).to_not have_content(@plant5.name)
   end
 end

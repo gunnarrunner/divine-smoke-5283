@@ -1,0 +1,6 @@
+<h1> <%= @garden.name%>'s Garden!! </h1>
+<p> Organic: <%= @garden.organic %> </p>
+<br>
+
+<h2> Plants Associated with this Garden: </h2>
+<p> <%= @garden.unique_name_and_not_100_days.join(", ") %> </p>
